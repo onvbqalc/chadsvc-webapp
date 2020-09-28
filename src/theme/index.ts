@@ -17,7 +17,7 @@ const theme = {
     },
     white,
   },
-  siteWidth: 1200,
+  siteWidth: 980,
   spacing: {
     1: 4,
     2: 8,

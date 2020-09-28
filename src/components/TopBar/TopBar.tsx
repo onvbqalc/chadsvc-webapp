@@ -19,9 +19,21 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
           <StyledLogoWrapper>
             <Logo />
           </StyledLogoWrapper>
-          <StyledAccountButtonWrapper>
-            <AccountButton />
-          </StyledAccountButtonWrapper>
+          <StyledActionsMenu>
+            <StyledWalletButtonWrapper>
+              <AccountButton text="Wallet" customColor="blue" />
+            </StyledWalletButtonWrapper>
+            <StyledSeriesButtonsWrapper>
+              <AccountButton text="Series" customColor="purple" />
+              <AccountButton text="Series" customColor="blue" />
+              <AccountButton text="Series" customColor="pink" />
+            </StyledSeriesButtonsWrapper>
+            <StyledActionsButtonWrapper>
+              <AccountButton text="Staked" customColor="purple" />
+              <AccountButton text="Chadlets" customColor="blue" />
+              <AccountButton text="Gallery" customColor="pink" />
+            </StyledActionsButtonWrapper>
+          </StyledActionsMenu>
         </StyledTopBarInner>
       </Container>
     </StyledTopBar>
@@ -29,16 +41,44 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
 }
 
 const StyledLogoWrapper = styled.div`
-  width: 156px;
+  width: 377px;
   @media (max-width: 400px) {
     width: auto;
   }
 `
 
-const StyledTopBar = styled.div``
+const StyledTopBar = styled.div`
+`
+const StyledWalletButtonWrapper = styled.div`
+  width: 100%;
+  max-width: 110px;
+  display: block;
+  margin: 8px 0 12px auto;
+`
+
+const StyledActionsMenu = styled.div`
+  text-align: right;
+  width: 500px;
+  display: block;
+`
+
+const StyledSeriesButtonsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 280px;
+  margin: 8px 0 12px auto;
+`
+const StyledActionsButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  max-width: 420px;
+  margin: 18px 0 12px auto;
+  transform: scale(1.15);
+  transform-origin: 100% 50%;
+`
 
 const StyledTopBarInner = styled.div`
-  align-items: center;
+  align-items: start;
   display: flex;
   height: ${props => props.theme.topBarSize}px;
   justify-content: space-between;
@@ -58,7 +98,7 @@ const StyledAccountButtonWrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: flex-end;
-  width: 156px;
+  width: 320px;
   @media (max-width: 400px) {
     justify-content: center;
     width: auto;

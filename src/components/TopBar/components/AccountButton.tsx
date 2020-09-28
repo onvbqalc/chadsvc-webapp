@@ -10,7 +10,10 @@ import WalletProviderModal from '../../WalletProviderModal'
 
 import AccountModal from './AccountModal'
 
-interface AccountButtonProps {}
+interface AccountButtonProps {
+  customColor?: 'purple' | 'blue' | 'pink',
+  text?: string
+}
 
 const AccountButton: React.FC<AccountButtonProps> = (props) => {
 
@@ -28,20 +31,24 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
       {!account ? (
         <Button
           onClick={handleUnlockClick}
+          customColor={props.customColor}
           size="sm"
-          text="Unlock Wallet"
+          text={props.text || "Unlock Wallet"}
         />
       ) : (
         <Button
           onClick={onPresentAccountModal}
+          customColor={props.customColor}
           size="sm"
-          text="My Wallet"
+          text={props.text || "My Wallet"}
         />
       )}
     </StyledAccountButton>
   )
 }
 
-const StyledAccountButton = styled.div``
+const StyledAccountButton = styled.div`
+  flex: 1;
+`
 
 export default AccountButton

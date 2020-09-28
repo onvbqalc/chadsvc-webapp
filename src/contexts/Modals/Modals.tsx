@@ -55,6 +55,7 @@ const StyledModalWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   position: fixed;
+  z-index: 99999;
   top: 0; right: 0; bottom: 0; left: 0;
 `
 

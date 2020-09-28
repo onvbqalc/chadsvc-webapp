@@ -19,6 +19,11 @@ import { Farm } from '../../../contexts/Farms'
 import { bnToDec } from '../../../utils'
 import { getEarned, getPoolStartTime } from '../../../yamUtils'
 
+import greekRare from '../../../assets/img/greek-rare.png'
+import greekCommon from '../../../assets/img/greek-common.png'
+import gradientBg from '../../../assets/img/blue-pink-gradient.png'
+import wavyClipArt from '../../../assets/img/wavy-clipart.png'
+
 const FarmCards: React.FC = () => {
   const [farms] = useFarms()
   const { account } = useWallet()
@@ -35,17 +40,37 @@ const FarmCards: React.FC = () => {
   return (
     <StyledCards>
       {!!rows[0].length ? rows.map((farmRow, i) => (
-        <StyledRow key={i}>
+        (i === 0 || i === 1) && (<StyledRow key={i}>
+          <StyledRowHeader>
+            {i === 0 && 
+              <React.Fragment>
+                <StyledGreekImage src={greekRare} />
+                <StyledHeading>
+                  420 Chadlets
+                </StyledHeading>
+                <StyledWavyRare src={wavyClipArt} />
+              </React.Fragment>
+            }
+            {i === 1 &&
+              <React.Fragment>
+                <StyledGreekImage src={greekCommon} />
+                <StyledHeading>
+                  69 Chadlets
+                </StyledHeading>
+                <StyledWavyCommon src={wavyClipArt} />
+              </React.Fragment>
+            }
+          </StyledRowHeader>
           {farmRow.map((farm, j) => (
             <React.Fragment key={j}>
               <FarmCard farm={farm} />
               {(j === 0 || j === 1) && <StyledSpacer />}
             </React.Fragment>
           ))}
-        </StyledRow>
+        </StyledRow>)
       )) : (
           <StyledLoadingWrapper>
-            <Loader text="Loading farms" />
+            <Loader text="Loading.." />
           </StyledLoadingWrapper>
         )}
     </StyledCards>
@@ -151,7 +176,9 @@ const StyledCardAccent = styled.div`
 `
 
 const StyledCards = styled.div`
-  width: 900px;
+  width: 90%;
+  margin-top: 220px;
+  max-width: 980px;
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -166,7 +193,9 @@ const StyledLoadingWrapper = styled.div`
 
 const StyledRow = styled.div`
   display: flex;
-  margin-bottom: ${props => props.theme.spacing[4]}px;
+  position: relative;
+  margin-top: 230px;
+  margin-bottom: 300px;
   flex-flow: row wrap;
   @media (max-width: 768px) {
     width: 100%;
@@ -196,8 +225,8 @@ const StyledContent = styled.div`
 `
 
 const StyledSpacer = styled.div`
-  height: ${props => props.theme.spacing[4]}px;
-  width: ${props => props.theme.spacing[4]}px;
+  width: 50px;
+  height: 50px;
 `
 
 const StyledDetails = styled.div`
@@ -214,6 +243,55 @@ const StyledHarvestable = styled.div`
   font-size: 16px;
   height: 48px;
   text-align: center;
+`
+
+const StyledRowHeader = styled.div`
+  height: 164px;
+  width: 890px;
+  position: absolute;
+  right: 0;
+  top: -230px;
+  background-size: 100% 100%;
+  background-image: url(${gradientBg});
+`
+
+const StyledHeading = styled.div`
+  display: block;
+  text-align: right;
+  text-shadow: rgba(0, 0, 0, 0.298039) 0px 5px 0px;
+  font-size: 75px;
+  color: #02F2F2;
+  text-transform: uppercase;
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+  z-index: 2;
+`
+
+const StyledGreekImage = styled.img`
+  position: absolute;
+  left: -120px;
+  top: -80px;
+  width: 400px;
+  transform: rotate(-10deg);
+`
+const StyledWavyRare = styled.img`
+  position: absolute;
+  right: -30px;
+  top: 0px;
+  transform: rotate(-210deg);
+  width: 263px;
+  height: 204px;
+  object-fit: cover;
+`
+const StyledWavyCommon = styled.img`
+  position: absolute;
+  right: -30px;
+  top: 0px;
+  transform: rotate(110deg);
+  width: 223px;
+  height: 284px;
+  object-fit: cover;
 `
 
 export default FarmCards

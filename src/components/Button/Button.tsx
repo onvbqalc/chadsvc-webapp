@@ -1,9 +1,12 @@
 import React, { useContext, useMemo } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
+import gradientBg from '../../assets/img/blue-pink-gradient.png'
+
 import { Link } from 'react-router-dom'
 
 interface ButtonProps {
+  customColor?: 'purple' | 'blue' | 'pink',
   children?: React.ReactNode,
   disabled?: boolean,
   href?: string,
@@ -15,6 +18,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({
+  customColor,
   children,
   disabled,
   href,
@@ -32,6 +36,20 @@ const Button: React.FC<ButtonProps> = ({
       buttonColor = color.grey[500]
       break
     case 'default':
+    default:
+      buttonColor = color.primary.main
+  }
+
+  switch (customColor) {
+    case 'purple':
+      buttonColor = "#BA83F0"
+      break
+    case 'blue':
+      buttonColor = "#02F2F2"
+      break
+    case 'pink':
+      buttonColor = "#F5C1F0"
+      break
     default:
       buttonColor = color.primary.main
   }
@@ -101,10 +119,11 @@ interface StyledButtonProps {
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background-color: ${props => props.theme.color.grey[200]};
+  font-weight: bold;
+  text-shadow: rgba(255, 255, 255, 0.6) 0.2px 0.2px 0.2px, rgba(0, 0, 0, 0.6) -0.2px -0.2px 0.2px;
+  text-transform: uppercase;
+  background-color: transparent;
   border: 0;
-  border-radius: 12px;
-  box-shadow: ${props => props.boxShadow};
   color: ${props => !props.disabled ? props.color : `${props.color}55`};
   cursor: pointer;
   display: flex;
@@ -117,8 +136,10 @@ const StyledButton = styled.button<StyledButtonProps>`
   padding-right: ${props => props.padding}px;
   pointer-events: ${props => !props.disabled ? undefined : 'none'};
   width: 100%;
+  background-image: url(${gradientBg});
+  background-size: 100% 100%;
   &:hover {
-    background-color: ${props => props.theme.color.grey[100]};
+    opacity: 0.9;
   }
 `
 

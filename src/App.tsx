@@ -10,6 +10,7 @@ import { UseWalletProvider } from 'use-wallet'
 import DisclaimerModal from './components/DisclaimerModal'
 import MobileMenu from './components/MobileMenu'
 import TopBar from './components/TopBar'
+import SiteBackground from './components/SiteBackground'
 
 import FarmsProvider from './contexts/Farms'
 import ModalsProvider from './contexts/Modals'
@@ -38,6 +39,7 @@ const App: React.FC = () => {
   return (
     <Providers>
       <Router>
+        <SiteBackground backgroundIndex={Math.floor(Math.random() * Math.floor(9))} />
         <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
         <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
         <Switch>
@@ -90,7 +92,7 @@ const Disclaimer: React.FC = () => {
 
   useEffect(() => {
     const seenDisclaimer = localStorage.getItem('disclaimer')
-    if (!seenDisclaimer) {
+    if (!seenDisclaimer && false) {
       onPresentDisclaimerModal()
     }
   }, [])
